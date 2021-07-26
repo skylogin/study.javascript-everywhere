@@ -1,6 +1,8 @@
 const express = require('express');
 const { ApolloServer } = require('apollo-server-express');
 const jwt = require('jsonwebtoken');
+const helmet = require('helmet');
+const cors = require('cors');
 // env파일에서 환경정보 가져오기
 require('dotenv').config();
 
@@ -27,6 +29,8 @@ const getUser = token => {
 
 // express 시작
 const app = express();
+app.use(helmet());
+app.use(cors());
 
 // 몽고DB 연결
 db.connect(DB_HOST);
