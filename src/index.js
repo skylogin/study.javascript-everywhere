@@ -3,6 +3,8 @@ const { ApolloServer } = require('apollo-server-express');
 const jwt = require('jsonwebtoken');
 const helmet = require('helmet');
 const cors = require('cors');
+const depthLimit = require('graphql-depth-limit');
+const { createComplexityLimitRule } = require('graphql-validation-complexity');
 // env파일에서 환경정보 가져오기
 require('dotenv').config();
 
@@ -39,6 +41,7 @@ db.connect(DB_HOST);
 const server = new ApolloServer({ 
   typeDefs, 
   resolvers, 
+  validationRules: [depthLimit(5), createComplexityLimitRule(1000)],
   context: ({ req }) => {
     // 헤더에서 jwt 가져오기 
     const token = req.headers.authorization;
