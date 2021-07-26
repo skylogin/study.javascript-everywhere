@@ -65,3 +65,7 @@ typings/
 
 yarn.lock
 package-lock.json
+.cache 
+
+# web source
+web/dist/**
