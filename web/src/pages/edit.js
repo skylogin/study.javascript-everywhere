@@ -12,6 +12,8 @@ const EditNote = props => {
   const { loading, error, data } = useQuery(GET_NOTE, { variables: { id }});
 
   const { data: userdata } = useQuery(GET_ME);
+  // TOBE: userdata부분이 URL 직접호출시 바로 가져와지지 않음.
+  //       그러다보니 36라인의 userdata가 undefined가 되어 .me 데이터에서 에러가 남
 
   console.log("==========")
   console.log(data, userdata);
