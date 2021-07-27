@@ -1,6 +1,8 @@
 import React from 'react';
 import { useQuery, gql } from '@apollo/client';
+import ReactMarkdown from 'react-markdown';
 
+import NoteFeed from '../components/NoteFeed';
 import Button from '../components/Button';
 
 const GET_NOTES = gql`
@@ -34,10 +36,7 @@ const Home = () => {
   }
 
   return (
-    <div>
-      {console.log(data)}
-      The data loaded!
-    </div>
+      <NoteFeed notes={data.noteFeed.notes} />
   )
 }
 
