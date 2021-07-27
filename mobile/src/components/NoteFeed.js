@@ -1,5 +1,5 @@
 import React from 'react';
-import { FlatList, View, Text } from 'react-native';
+import { FlatList, View, TouchableOpacity } from 'react-native';
 import styled from 'styled-components';
 
 import Note from './Note';
@@ -11,18 +11,26 @@ const notes = [
 ];
 
 const FeedView = styled.View`
-  height: 100;
+  height: 100px;
   overflow: hidden;
   margin-bottom: 10px;
 `;
 const Separator = styled.View`
-  height: 1;
+  height: 1px;
   width: 100%;
   background-color: #ced0ce;
 `;
 
 
 const NoteFeed = props => {
+
+  const onTouch = item => {
+    props.navigation.navigate('Note', {
+      id: item.id
+    });
+  }
+
+
   return (
     <View>
       <FlatList
@@ -30,9 +38,11 @@ const NoteFeed = props => {
         keyExtractor={({ id }) => id.toString()}
         ItemSeparatorComponent={() => <Separator />}
         renderItem={({ item }) => (
-          <FeedView>
-            <Note note={item} />
-          </FeedView>
+          <TouchableOpacity onPress={() => onTouch(item)}>
+            <FeedView>
+              <Note note={item} />
+            </FeedView>
+          </TouchableOpacity>
         )}
       />
     </View>
