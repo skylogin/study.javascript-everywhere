@@ -9,4 +9,8 @@ const Favorite = () => {
   )
 }
 
+Favorite.navigationOptions = {
+  title: 'Favorite'
+};
+
 export default Favorite;

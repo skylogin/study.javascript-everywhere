@@ -9,4 +9,9 @@ const MyNotes = () => {
   )
 }
 
+MyNotes.navigationOptions = {
+  title: 'My Notes'
+};
+
+
 export default MyNotes;

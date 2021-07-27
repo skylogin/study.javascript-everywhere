@@ -1,28 +1,56 @@
 import React from 'react';
 import { createAppContainer } from 'react-navigation';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
+import { createStackNavigator } from 'react-navigation-stack';
+
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 import Feed from './feed';
-import Favorite from './favorites';
+import Favorites from './favorites';
 import MyNotes from './mynotes';
+import NoteScreen from './note';
+
+
+const FeedStack = createStackNavigator({
+  Feed: Feed,
+  Note: NoteScreen
+});
+const MyStack = createStackNavigator({
+  MyNotes: MyNotes,
+  Note: NoteScreen
+});
+const FavStack = createStackNavigator({
+  Favorites: Favorites,
+  Note: NoteScreen
+});
+
 
 const TabNavigator = createBottomTabNavigator({
   FeedScreen: {
-    screen: Feed,
+    screen: FeedStack,
     navigationOptions: {
       tabBarLabel: 'Feed',
+      tabBarIcon: ({ tintColor }) => (
+        <MaterialCommunityIcons name="home" size={24} color={tintColor} />
+      )
     }
   },
   MyNoteScrren: {
-    screen: MyNotes,
+    screen: MyStack,
     navigationOptions: {
       tabBarLabel: 'My Notes',
+      tabBarIcon: ({ tintColor }) => (
+        <MaterialCommunityIcons name="notebook" size={24} color={tintColor} />
+      )
     }
   },
   FavoriteScrren: {
-    screen: Favorite,
+    screen: FavStack,
     navigationOptions: {
-      tabBarLabel: 'Favorite',
+      tabBarLabel: 'Favorites',
+      tabBarIcon: ({ tintColor }) => (
+        <MaterialCommunityIcons name="star" size={24} color={tintColor} />
+      )
     }
   },
 });
