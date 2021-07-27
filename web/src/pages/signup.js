@@ -7,7 +7,10 @@ const SIGNUP_USER = gql`
   }
 `;
 
+
 const SignUp = props => {
+  const client = useApolloClient();
+
   const [values, setValues] = useState();
   
   useEffect(() => {
@@ -17,6 +20,7 @@ const SignUp = props => {
   const [signUp, { loading, error }] = useMutation(SIGNUP_USER, {
     onCompleted: data => {
       localStorage.setItem('token', data.signUp);
+      client.writeData({ data: { isLoggedIn: true }});
       props.history.push('/');
     }
   });
