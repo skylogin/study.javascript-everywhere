@@ -28,6 +28,27 @@ const GET_NOTES = gql`
 const Home = () => {
   const { data, loading, error, fetchMore } = useQuery(GET_NOTES);
 
+  const onLoadButton = () => {
+    fetchMore({
+      variables: {
+        cursor: data.noteFeed.cursor
+      },
+      updateQuery: (previousResult, { fetchMoreResult }) => {
+        return {
+          noteFeed: {
+            cursor: fetchMoreResult.noteFeed.cursor,
+            hasNextPage: fetchMoreResult.noteFeed.hasNextPage,
+            notes: [
+              ...previousResult.noteFeed.notes,
+              ...fetchMoreResult.noteFeed.notes
+            ],
+            _typename: 'noteFeed'
+          }
+        };
+      }
+    })
+  };
+
   if(loading){
     return <p>Loading...</p>
   }
@@ -36,8 +57,13 @@ const Home = () => {
   }
 
   return (
+    <React.Fragment>
       <NoteFeed notes={data.noteFeed.notes} />
-  )
+      {data.noteFeed.hasNextPage && (
+        <Button onClick={onLoadButton}>Load more</Button>
+      )}
+    </React.Fragment>
+  );
 }
 
 export default Home;
