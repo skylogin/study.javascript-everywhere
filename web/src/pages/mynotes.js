@@ -11,7 +11,7 @@ const MyNotes = () => {
   });
 
   const { loading, error, data } = useQuery(GET_MY_NOTES);
-  
+
   if(loading){
     return <p>loading...</p>;
   }
