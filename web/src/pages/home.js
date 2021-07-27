@@ -9,7 +9,9 @@ import { GET_NOTES } from '../gql/query';
 
 
 const Home = () => {
-  const { data, loading, error, fetchMore } = useQuery(GET_NOTES);
+  const { data, loading, error, fetchMore } = useQuery(GET_NOTES, {
+    pollInterval: 10000,
+  });
 
   const onLoadButton = () => {
     fetchMore({
