@@ -3,7 +3,7 @@ import { useMutation, gql } from '@apollo/client';
 
 import NoteForm from '../components/NoteForm';
 
-import { GET_NOTES } from '../gql/query';
+import { GET_NOTES, GET_MY_NOTES } from '../gql/query';
 
 const NEW_NOTE = gql`
   mutation newNote($content: String!){
@@ -32,7 +32,7 @@ const NewNote = props => {
 
   const [data, { loading, error }] = useMutation(NEW_NOTE, {
     // 아폴로는 기본적으로 캐싱하는데, 새 노트를 불러오기 위해 캐시 갱신
-    refetchQueries:[{ query: GET_NOTES }],
+    refetchQueries:[{ query: GET_NOTES }, { query: GET_MY_NOTES }],
     onCompleted: data => {
       props.history.push(`note/${data.newNote.id}`);
     }
