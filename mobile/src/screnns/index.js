@@ -12,6 +12,7 @@ import NoteScreen from './note';
 import AuthLoading from './authloading';
 import SignIn from './signin';
 import Settings from './settings';
+import SignUp from './signup';
 
 
 const FeedStack = createStackNavigator({
@@ -27,10 +28,11 @@ const FavStack = createStackNavigator({
   Note: NoteScreen
 });
 const AuthStack = createStackNavigator({
-  Favorites: SignIn,
+  SignIn: SignIn,
+  SignUp: SignUp,
 });
 const SettingsStack = createStackNavigator({
-  Favorites: Settings,
+  Settings: Settings,
 });
 
 
