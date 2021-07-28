@@ -1,12 +1,46 @@
 import React from 'react';
 import { Text, View } from 'react-native';
+import { useQuery, gql } from '@apollo/client';
 
-const Favorite = () => {
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Favorite</Text>
-    </View>
-  )
+import NoteFeed from '../components/NoteFeed';
+import Loading from '../components/Loading';
+
+const GET_MY_FAVORITES = gql`
+  query me{
+    me{
+      id
+      username
+      favorites{
+        id
+        createdAt
+        content
+        favoriteCount
+        author {
+          username
+          id
+          avatar
+        }
+      }
+    }
+  }
+
+`;
+
+const Favorite = props => {
+  const { loading, error, data } = useQuery(GET_MY_FAVORITES);
+  
+  if(loading){
+    return <Loading />;
+  }
+  if(error){
+    return <Text>Error loading notes</Text>;
+  }
+
+  if(data.me.favorites.length !== 0){
+    return <NoteFeed notes={data.me.favorites} navigation={props.navigation} />
+  } else{
+    return <Text>No notes yet!</Text>
+  }
 }
 
 Favorite.navigationOptions = {

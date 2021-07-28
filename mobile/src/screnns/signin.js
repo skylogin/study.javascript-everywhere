@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Button, Text } from 'react-native';
+import { Text } from 'react-native';
 import * as SecureStore from 'expo-secure-store';
 import { useMutation, gql } from '@apollo/client';
 
