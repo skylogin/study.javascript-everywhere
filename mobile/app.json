@@ -18,9 +18,11 @@
     },
     "assetBundlePatterns": ["**/*"],
     "ios": {
+      "bundleIdentifier": "com.github.skylogin.notedly",
       "supportsTablet": true
     },
     "android": {
+      "package": "com.github.skylogin.notedly",
       "adaptiveIcon": {
         "foregroundImage": "./assets/custom/icon.png",
         "backgroundColor": "#4A90E2"
