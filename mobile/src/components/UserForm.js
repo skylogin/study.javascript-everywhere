@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, TouchableOpacity } from 'react-native';
 import styled from 'styled-components/native';
 
 const FormView = styled.View`
@@ -40,7 +39,12 @@ const UserForm = props => {
   const [password, setPassword] = useState();
 
   const handleSubmit = () => {
-
+    props.action({
+      variables: {
+        email: email,
+        password: password
+      }
+    })
   }
 
   return (
